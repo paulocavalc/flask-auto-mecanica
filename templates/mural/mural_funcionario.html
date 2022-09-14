@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block body %}
+<h2>MURAL DE FUNCIONÁRIOS</h2>
+
+{% for cliente in clientes %}
+<div class="container">
+    <div class="row">
+        <form action="{{url_for('app_cliente.cliente_add')}}" method="POST">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/images/upload (12).jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{cliente.nome}}</h5>
+                    <p class="card-text">{{cliente.rg}}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

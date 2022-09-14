@@ -1,0 +1,141 @@
+{% extends "layout/base.html" %}
+{% block body %}
+<h2>FICHA DA EMPRESA</h2>
+<div class="col mx-auto">
+    {% if emp %}
+    <form action="/empresa-update/{{emp.id}}" method="POST">
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="cnpj" value="{{emp.cnpj}}" class="form-control" placeholder="CNPJ" aria-label="CNPJ">
+              </div>
+            <div class="col">
+              <input type="text" name="nome" value="{{emp.nome}}" class="form-control" placeholder="Nome" aria-label="Nome">
+            </div>
+            <div class="col">
+                <input type="text" name="inscricao_estadual" value="{{emp.inscricao_estadual}}" class="form-control" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="endereco" value="{{emp.endereco}}" class="form-control" placeholder="Endereço" aria-label="Endereço">
+            </div>
+            <div class="col">
+                <input type="text" name="latitude" value="{{emp.latitude}}" class="form-control" placeholder="Latitude" aria-label="Latitude">
+            </div>
+            <div class="col">
+                <input type="text" name="longitude" value="{{emp.longitude}}" class="form-control" placeholder="Longitude" aria-label="Longitude">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col d-grid gap-2 col-12">
+                <button class="btn btn-success active" type="submit">ATUALIZAR</button>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <form action="{{url_for('app_empresa.empresa_add')}}" method="POST">
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="cnpj" class="form-control" placeholder="CNPJ" aria-label="CNPJ">
+              </div>
+            <div class="col">
+              <input type="text" name="nome" class="form-control" placeholder="Nome" aria-label="Nome">
+            </div>
+            <div class="col">
+                <input type="text" name="inscricao_estadual" class="form-control" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="endereco" class="form-control" placeholder="Endereço" aria-label="Endereço">
+            </div>
+            <div class="col">
+                <input type="text" name="latitude" class="form-control" placeholder="Latitude" aria-label="Latitude">
+            </div>
+            <div class="col">
+                <input type="text" name="longitude" class="form-control" placeholder="Longitude" aria-label="Longitude">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col d-grid gap-2 col-6">
+                <a href="/auto-mecanica" class="btn btn-secondary active">VOLTAR</a>
+            </div>
+            <div class="col d-grid gap-2 col-6">
+                <button class="btn btn-success active" type="submit">SALVAR</button>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+<div>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="my-4">
+    <table class="table table-striped table-bordered" style="text-align: center">
+        <thead class="table-dark text-light">
+            <tr>
+                <td>CNPJ</td>
+                <td>NOME</td>
+                <td>INSCRIÇÃO ESTADUAL</td>
+                <td>ENDEREÇO</td>
+                <td>LATITUDE</td>
+                <td>LONGITUDE</td>
+                <td>OPÇÃO</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empresa in empresas %}
+            <tr>
+                <td>{{empresa.cnpj}}</td>
+                <td>{{empresa.nome}}</td>
+                <td>{{empresa.inscricao_estadual}}</td>
+                <td>{{empresa.endereco}}</td>
+                <td>{{empresa.latitude}}</td>
+                <td>{{empresa.longitude}}</td>
+                <td>
+                    <a href="/empresa-edit/{{empresa.id}}" class="btn text-primary px-3"><i class="far fa-edit fa-lg"></i></a>
+                    <a href="/{{empresa.id}}" class="btn text-danger px-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i></a>
+                    
+                    <div class="modal fade my-4" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title">Confirmação</h5>
+                                </div>
+                                <form action="/empresa-delete/{{empresa.id}}" method="POST">
+                                    <div class="modal-body">
+                                        <p>Deseja realmente excluir?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Sim</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var senha = 0;
+
+    if (senha != 1) {
+        $('#deleteModal').modal('show');
+    }
+</script>
+{% endblock script %}

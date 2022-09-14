@@ -1,0 +1,219 @@
+{% extends "layout/base.html" %}
+
+{% block body %}
+
+<h2>FICHA DO FUNCIONÁRIO</h2>
+<div class="col mx-auto">
+    {% if func %}
+    <form action="/funcionario-update/{{func.id}}" method="POST">
+        <div class="my-4">
+            <div class="col-sm-2 imgUp">
+                <div class="imagePreview" style="width: 200px;
+                height: 200px;
+                border-radius: 150%;
+                background-position: center center;
+                background:url('/static/images/upload\ \(3\).jpeg');
+                background-size: cover;
+                text-align: center;
+                background-repeat: no-repeat;
+                display: inline-block;"></div>
+                <label class="btn btn-primary action" style="border-radius: 40px; display: block; width: 200px;">
+                    UPLOAD
+                    <input type="file" accept="/static/images/" name="foto" value="{{func.foto}}" class="uploadFile img" style="width: 0px;height: 0px;overflow: hidden;">
+                </label>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="codigo" value="{{func.codigo}}" class="form-control" placeholder="Código" aria-label="Código">
+              </div>
+            <div class="col">
+              <input type="text" name="nome" value="{{func.nome}}" class="form-control" placeholder="Nome" aria-label="Nome">
+            </div>
+            <div class="col">
+                <input type="text" name="especialidade" value="{{func.especialidade}}" class="form-control" placeholder="Especialidade" aria-label="Especialidade">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="cpf" value="{{func.cpf}}" class="form-control" placeholder="CPF" aria-label="CPF">
+            </div>
+            <div class="col">
+                <input type="text" name="rg" value="{{func.rg}}" class="form-control" placeholder="RG" aria-label="RG">
+              </div>
+            <div class="col">
+              <input type="text" name="telefone" value="{{func.telefone}}" class="form-control" placeholder="Telefone" aria-label="Telefone">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="date" name="data_adimissao" value="{{func.data_adimissao}}" class="form-control" placeholder="Data Adimissao" aria-label="Data Adimissao">
+            </div>
+            <div class="col">
+                <input type="text" name="salario" value="{{func.salario}}" class="form-control" placeholder="Salário" aria-label="Salário">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col d-grid gap-2 col-12">
+                <button class="btn btn-success active" type="submit">ATUALIZAR</button>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <form action="{{url_for('app_funcionario.funcionario_add')}}" method="POST">
+        <div class="my-4">
+            <div class="col-sm-2 imgUp">
+                <div class="imagePreview" style="width: 200px;
+                height: 200px;
+                border-radius: 150%;
+                background-position: center center;
+                background:url('/static/images/upload\ \(3\).jpeg');
+                background-size: cover;
+                text-align: center;
+                background-repeat: no-repeat;
+                display: inline-block;"></div>
+                <label class="btn btn-primary action" style="border-radius: 40px; display: block; width: 200px;">
+                    UPLOAD
+                    <input type="file" accept="/static/images/" name="foto" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                </label>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="codigo" class="form-control" placeholder="Código" aria-label="Código">
+              </div>
+            <div class="col">
+              <input type="text" name="nome" class="form-control" placeholder="Nome" aria-label="Nome">
+            </div>
+            <div class="col">
+                <input type="text" name="especialidade" class="form-control" placeholder="Especialidade" aria-label="Especialidade">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="text" name="cpf" class="form-control" placeholder="CPF" aria-label="CPF">
+            </div>
+            <div class="col">
+                <input type="text" name="rg" class="form-control" placeholder="RG" aria-label="RG">
+              </div>
+            <div class="col">
+              <input type="text" name="telefone" class="form-control" placeholder="Telefone" aria-label="Telefone">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <input type="date" name="data_adimissao" class="form-control" placeholder="Data Adimissao" aria-label="Data Adimissao">
+            </div>
+            <div class="col">
+                <input type="text" name="salario" class="form-control" placeholder="Salário" aria-label="Salário">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col d-grid gap-2 col-6">
+                <a href="/auto-mecanica" class="btn btn-secondary active">VOLTAR</a>
+            </div>
+            <div class="col d-grid gap-2 col-6">
+                <button class="btn btn-success active" type="submit">SALVAR</button>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+
+<div>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="my-4">
+    <table class="table table-striped table-bordered" style="text-align: center">
+        <thead class="table-dark text-light">
+            <tr>
+                <td>CÓDIGO</td>
+                <td>NOME</td>
+                <td>ESPECIALIDADE</td>
+                <td>CPF</td>
+                <td>RG</td>
+                <td>TELEFONE</td>
+                <td>DATA ADIMISSÃO</td>
+                <td>SALÁRIO</td>
+                <td>FOTO</td>
+                <td>OPÇÃO</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for funcionario in funcionarios %}
+            <tr>
+                <td>{{funcionario.codigo}}</td>
+                <td>{{funcionario.nome}}</td>
+                <td>{{funcionario.especialidade}}</td>
+                <td>{{funcionario.cpf}}</td>
+                <td>{{funcionario.rg}}</td>
+                <td>{{funcionario.telefone}}</td>
+                <td>{{funcionario.data_adimissao}}</td>
+                <td>{{funcionario.salario}}</td>
+                <td>{{funcionario.foto}}</td>
+                <td>
+                    <a href="/funcionario-edit/{{funcionario.id}}" class="btn text-primary px-3"><i class="far fa-edit fa-lg"></i></a>
+                    <a href="/{{funcionario.id}}" class="btn text-danger px-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i></a>
+                
+                    <div class="modal fade my-4" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title">Confirmação</h5>
+                                </div>
+                                <form action="/funcionario-delete/{{funcionario.id}}" method="POST">
+                                    <div class="modal-body">
+                                        <p>Deseja realmente excluir?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Sim</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block script %} 
+<script>
+    $(document).on("click", "i.del" , function() {
+        $(this).parent().remove();
+    });
+
+    $(function() {
+        $(document).on("change",".uploadFile", function(){
+            var uploadFile = $(this);
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader) return;
+            
+            if (/^image/.test( files[0].type)){
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onloadend = function(){
+                uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+            }
+        }
+    });
+    });
+
+    var senha = 0;
+
+    if (senha != 1) {
+        $('#deleteModal').modal('show');
+    }
+</script>
+{% endblock script %} 
