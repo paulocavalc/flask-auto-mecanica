@@ -7,12 +7,8 @@ import psycopg2.extras
 load_dotenv()
 
 app_funcionario = Blueprint('app_funcionario', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
 @app_funcionario.route('/funcionario-all')
 def funcionario_all():

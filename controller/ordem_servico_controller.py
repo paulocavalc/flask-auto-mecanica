@@ -7,12 +7,9 @@ import psycopg2.extras
 load_dotenv()
 
 app_ordem_servico = Blueprint('app_ordem_servico', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 
 @app_ordem_servico.route('/ordem-servico-all')
 def ordem_servico_all():

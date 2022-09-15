@@ -7,12 +7,9 @@ import psycopg2.extras
 load_dotenv()
 
 app_servico = Blueprint('app_servico', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 
 @app_servico.route('/servico-all')
 def servico_all():

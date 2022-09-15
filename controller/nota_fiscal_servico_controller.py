@@ -7,12 +7,9 @@ import psycopg2.extras
 load_dotenv()
 
 app_nota_fiscal_servico = Blueprint('app_nota_fiscal_servico', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 
 @app_nota_fiscal_servico.route('/nota-fiscal-servico-all')
 def nota_fiscal_servico_all():

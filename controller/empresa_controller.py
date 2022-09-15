@@ -7,12 +7,9 @@ import psycopg2.extras
 load_dotenv()
 
 app_empresa = Blueprint('app_empresa', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 
 @app_empresa.route('/empresa-all')
 def empresa_all():

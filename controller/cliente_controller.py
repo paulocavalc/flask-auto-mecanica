@@ -7,12 +7,9 @@ import psycopg2.extras
 load_dotenv()
 
 app_cliente = Blueprint('app_cliente', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 
 @app_cliente.route('/cliente-all')
 def cliente_all():
