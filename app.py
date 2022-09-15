@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-print(os.getenv("DATABASE_URL"))
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
