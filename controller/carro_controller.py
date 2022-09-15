@@ -20,7 +20,7 @@ conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 @app_carro.route('/carro-all', methods=['GET'])
 def carro_all():
     carro = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    carro.execute(os.getenv("SELECT"))
+    carro.execute('SELECT * FROM carro')
     carros = carro.fetchall()
     return render_template('carro/ficha_carro.html', carros=carros)
 
