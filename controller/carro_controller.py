@@ -17,7 +17,7 @@ conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 #            password= os.getenv("PASSWORD")
 #        )
 
-@app_carro.route('/carro-all')
+@app_carro.route('/carroall')
 def carro_all():
     carro = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     carro.execute('SELECT * FROM carro')
