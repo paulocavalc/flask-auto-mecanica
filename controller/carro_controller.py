@@ -17,11 +17,11 @@ conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 #            password= os.getenv("PASSWORD")
 #        )
 
-@app_carro.route('/carroall')
+@app_carro.route('/carro-all')
 def carro_all():
-    carros = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-#    carro.execute('SELECT * FROM carro')
-#    carros = super().fetchall()
+    carro = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    carro.execute('SELECT * FROM carro')
+    carros = carro.fetchall()
     return render_template('carro/ficha_carro.html', carros=carros)
 
 
