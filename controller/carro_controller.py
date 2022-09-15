@@ -7,12 +7,14 @@ import psycopg2.extras
 load_dotenv()
 
 app_carro = Blueprint('app_carro', __name__)
-conn = psycopg2.connect(
-            host= os.getenv("HOST"),
-            database= os.getenv("DATABASE"),
-            user= os.getenv("USER"),
-            password= os.getenv("PASSWORD")
-        )
+con = psycopg2.connect(os.getenv("DATABASE_URL"))
+
+#conn = psycopg2.connect(
+#            host= os.getenv("HOST"),
+#            database= os.getenv("DATABASE"),
+#            user= os.getenv("USER"),
+#            password= os.getenv("PASSWORD")
+#        )
 
 @app_carro.route('/carro-all')
 def carro_all():
