@@ -10,7 +10,6 @@ app_servico = Blueprint('app_servico', __name__)
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
-
 @app_servico.route('/servico-all')
 def servico_all():
     servico = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)

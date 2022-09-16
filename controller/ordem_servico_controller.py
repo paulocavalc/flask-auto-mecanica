@@ -10,7 +10,6 @@ app_ordem_servico = Blueprint('app_ordem_servico', __name__)
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
-
 @app_ordem_servico.route('/ordem-servico-all')
 def ordem_servico_all():
     ordem_servico = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)

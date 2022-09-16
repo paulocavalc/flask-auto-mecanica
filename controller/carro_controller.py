@@ -10,7 +10,6 @@ app_carro = Blueprint('app_carro', __name__)
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
-
 @app_carro.route('/carro-all')
 def carro_all():
     carro = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)

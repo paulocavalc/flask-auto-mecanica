@@ -10,7 +10,6 @@ app_cliente = Blueprint('app_cliente', __name__)
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
-
 @app_cliente.route('/cliente-all')
 def cliente_all():
     cliente = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)

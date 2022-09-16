@@ -10,7 +10,6 @@ app_nota_fiscal_servico = Blueprint('app_nota_fiscal_servico', __name__)
 
 conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 
-
 @app_nota_fiscal_servico.route('/nota-fiscal-servico-all')
 def nota_fiscal_servico_all():
     nota_fiscal_servico = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
